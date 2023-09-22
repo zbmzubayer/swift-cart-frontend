@@ -40,11 +40,11 @@ export default function Header() {
           <span className="text-xl font-bold text-amber-800">Swift Cart</span>
         </Link>
       </div>
-      <form className="flex">
+      <form className="flex rounded-md group">
         <input
           type="text"
           placeholder="Search Swift Cart"
-          className="px-3 py-2 bg-slate-100 rounded-l-md focus:outline-none"
+          className="px-3 py-2 bg-slate-100 rounded-l-md border-l-2 border-y-2 border-amber-600 focus:outline-none"
         />
         <button type="submit" className="bg-orange-950 text-amber-600 rounded-r-md px-3 py-2">
           <Search />
