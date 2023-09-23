@@ -1,3 +1,6 @@
+import { IReview } from './reviews.interface';
+import { ISeller } from './seller.interface';
+
 export interface IProduct {
   id: string;
   image: string;
@@ -12,6 +15,7 @@ export interface IProduct {
   createdAt: string;
   updatedAt: string;
   subCategory: string;
-
+  seller?: ISeller;
+  reviews?: IReview[];
   quantity?: number;
 }

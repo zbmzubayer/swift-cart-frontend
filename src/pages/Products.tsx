@@ -1,23 +1,21 @@
 import ProductCard from '@/components/Cards/ProductCard';
 import ProductFilterBar from '@/components/ProductFilterBar';
 import { IProduct } from '@/interfaces/product.interface';
+import { useGetProductsQuery } from '@/redux/features/product/productApi';
 import { useAppSelector } from '@/redux/hook';
-import { useLoaderData } from 'react-router-dom';
 
 export default function Products() {
-  const response = useLoaderData();
-  const { data } = response;
-  console.log(data);
-  //   console.log(response);
-
+  const { data, isLoading } = useGetProductsQuery(undefined);
   const { inStock, priceRange } = useAppSelector(state => state.product);
+
   let products: IProduct[] = [];
   if (inStock) {
-    products = data.filter((product: IProduct) => product.stock > 0 && product.price <= priceRange);
+    products = data?.data.filter((product: IProduct) => product.stock > 0 && product.price <= priceRange);
   } else if (priceRange > 0) {
-    products = data.filter((product: IProduct) => product.price <= priceRange);
+    products = data?.data.filter((product: IProduct) => product.price <= priceRange);
   }
 
+  if (isLoading) return <div className="text-center">Loading...</div>;
   return (
     <div className="mt-5 flex flex-col justify-between lg:flex-row">
       <div className="mb-5">

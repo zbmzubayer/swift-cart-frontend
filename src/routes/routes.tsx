@@ -2,6 +2,7 @@ import About from '@/pages/About';
 import Cart from '@/pages/Cart';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
+import ProductDetails from '@/pages/ProductDetails';
 import Products from '@/pages/Products';
 import Profile from '@/pages/Profile';
 import SignUp from '@/pages/SignUp';
@@ -33,6 +34,10 @@ const routes = createBrowserRouter([
         path: 'products',
         element: <Products />,
         loader: async () => fetch('http://localhost:5000/api/v1/product').then(res => res.json()),
+      },
+      {
+        path: 'product/:id',
+        element: <ProductDetails />,
       },
       {
         path: 'cart',

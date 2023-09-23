@@ -1,9 +1,3 @@
-import ProductFilterBar from '@/components/ProductFilterBar';
-
 export default function Home() {
-  return (
-    <div>
-      <ProductFilterBar />
-    </div>
-  );
+  return <div>Home page</div>;
 }

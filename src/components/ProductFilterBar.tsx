@@ -14,8 +14,6 @@ export default function ProductFilterBar() {
     // console.log(value);
     dispatch(setPriceRange(value[0]));
   };
-  console.log(inStock);
-  console.log(priceRange);
   return (
     <div>
       <Sheet>
@@ -39,7 +37,7 @@ export default function ProductFilterBar() {
             </div>
             <div className="w-[80%] space-y-3 ">
               <div className="flex items-center justify-between">
-                <Label htmlFor="price">Price range:</Label>
+                <p>Price range:</p>
                 <span className="text-sm text-gray-500 font-medium">${priceRange}</span>
               </div>
               <Slider defaultValue={[priceRange]} min={0} max={20000} step={1} onValueChange={handleSlider} />
@@ -61,7 +59,7 @@ export default function ProductFilterBar() {
           </div>
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <Label htmlFor="price">Price range:</Label>
+              <p>Price range:</p>
               <span className="text-sm text-gray-500 font-medium">${priceRange}</span>
             </div>
             <Slider defaultValue={[priceRange]} min={0} max={20000} step={1} onValueChange={handleSlider} />
