@@ -1,6 +1,8 @@
 import About from '@/pages/About';
+import Cart from '@/pages/Cart';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
+import Products from '@/pages/Products';
 import Profile from '@/pages/Profile';
 import SignUp from '@/pages/SignUp';
 import { createBrowserRouter } from 'react-router-dom';
@@ -26,6 +28,15 @@ const routes = createBrowserRouter([
       {
         path: 'sign-up',
         element: <SignUp />,
+      },
+      {
+        path: 'products',
+        element: <Products />,
+        loader: async () => fetch('http://localhost:5000/api/v1/product').then(res => res.json()),
+      },
+      {
+        path: 'cart',
+        element: <Cart />,
       },
       {
         path: 'my-profile',

@@ -1,9 +1,13 @@
-import { AlignRight, Search, X } from 'lucide-react';
+import { AlignRight, Search, ShoppingCart, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '/swift-cart-logo.svg';
 
 const navLinks = [
+  {
+    name: 'Products',
+    path: '/products',
+  },
   {
     name: 'About',
     path: '/about',
@@ -50,7 +54,7 @@ export default function Header() {
           <Search />
         </button>
       </form>
-      <nav>
+      <nav className="flex">
         <ul className="hidden sm:flex items-center gap-3 font-medium">
           {navLinks.map(({ name, path }) => (
             <li key={path}>
@@ -65,6 +69,9 @@ export default function Header() {
             </li>
           ))}
         </ul>
+        <Link to="/cart" className="p-3 rounded-xl text-amber-700 hover:bg-amber-900 hover:text-white">
+          <ShoppingCart size={30} className="inline-block" />
+        </Link>
         <div className="flex sm:hidden">
           <button className="text-orange-950" onClick={() => setIsOpen(!open)}>
             {open ? <X /> : <AlignRight />}

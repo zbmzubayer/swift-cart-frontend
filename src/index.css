@@ -6,6 +6,12 @@
 * {
   font-family: 'Inter', sans-serif;
 }
+.text-container {
+  display: -webkit-box; /* Display as a block element with special properties */
+  -webkit-line-clamp: 2; /* Number of lines to show before truncating */
+  -webkit-box-orient: vertical; /* Set the box orientation to vertical (default is horizontal) */
+  overflow: hidden; /* Hide any overflowing text */
+}
 
 @layer base {
   :root {
