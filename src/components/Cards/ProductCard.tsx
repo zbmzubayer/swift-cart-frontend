@@ -53,19 +53,19 @@ export default function ProductCard({ product }: ProductCardProps) {
                 />
               </button>
             </SheetTrigger>
-            <SheetContent>
+            <SheetContent className="overflow-auto">
               <SheetHeader>
                 <SheetTitle>Shopping Cart</SheetTitle>
                 <SheetDescription>Total: ${total}</SheetDescription>
               </SheetHeader>
               <div className="mt-3 grid gap-2">
                 {products.map(product => (
-                  <div key={product.id} className="flex items-center justify-between gap-2 p-2 border rounded-lg">
-                    <div className="flex items-center gap-2">
+                  <div key={product.id} className="flex items-center gap-2 p-1 border-2 rounded-lg">
+                    <div className="flex-shrink-0 flex justify-center items-center p-1 bg-white rounded-sm border">
                       <img
                         src={product.image}
                         alt={`${product.name} photo`}
-                        className="w-[50px] aspect-square border rounded-sm object-contain"
+                        className="w-[60px] aspect-square object-contain"
                       />
                     </div>
                     <div>
@@ -79,32 +79,30 @@ export default function ProductCard({ product }: ProductCardProps) {
                       </div>
                       <div className="flex items-center justify-between text-sm">
                         <p>
-                          Item total: <span className="font-semibold">${product.price * product.quantity!}</span>
+                          Sub total: <span className="font-semibold">${product.price * product.quantity!}</span>
                         </p>
-                        <p className="inline-block px-3 rounded-full bg-gray-400 hover:shadow-md">
-                          Quantity: {product.quantity}
-                        </p>
+                        <p className="inline-block px-2 rounded-full bg-gray-300">Qty: {product.quantity}</p>
                       </div>
                     </div>
 
-                    <div className="grid gap-2">
+                    <div className="flex flex-col gap-2">
                       <button
-                        className="p-2 bg-gray-400 hover:bg-gray-500 rounded-full"
+                        className="p-1 bg-slate-200 text-amber-900 hover:bg-slate-300 border border-gray-400 rounded-xl"
                         onClick={() => dispatch(addToCart(product))}
                       >
-                        <Plus size={25} className="h-4 w-4" />
+                        <Plus className="h-6 w-6" />
                       </button>
                       <button
-                        className="p-2 bg-gray-400 hover:bg-gray-500 rounded-full"
+                        className="p-1 bg-slate-200 text-amber-900 hover:bg-slate-300 border border-gray-400 rounded-xl"
                         onClick={() => dispatch(decreaseQuantity(product))}
                       >
-                        <Minus size={20} className="h-6 w-6" />
+                        <Minus className="h-6 w-6" />
                       </button>
                       <button
-                        className="p-2 bg-gray-400 hover:bg-gray-500 rounded-full"
+                        className="p-1 bg-slate-200 text-amber-900 hover:bg-slate-300 border border-gray-400 rounded-xl"
                         onClick={() => dispatch(removeFromCart(product))}
                       >
-                        <Trash2 size={20} className="h-6 w-6" />
+                        <Trash2 className="h-6 w-6" />
                       </button>
                     </div>
                   </div>
