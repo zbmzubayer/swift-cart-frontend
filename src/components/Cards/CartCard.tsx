@@ -4,12 +4,13 @@ import { useAppDispatch } from '@/redux/hook';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import { Button } from '../ui/button';
 
-interface CartCardProps {
+interface IProps {
   product: IProduct;
 }
 
-export default function CartCard({ product }: CartCardProps) {
+export default function CartCard({ product }: IProps) {
   const dispatch = useAppDispatch();
+
   return (
     <div className="max-w-2xl h-[150px] p-2 bg-slate-300 border-2 border-gray-700 rounded-lg">
       <div className="flex items-center gap-2">

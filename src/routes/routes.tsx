@@ -8,6 +8,7 @@ import Profile from '@/pages/Profile';
 import SignUp from '@/pages/SignUp';
 import { createBrowserRouter } from 'react-router-dom';
 import RootLayout from '../layouts/RootLayout/RootLayout';
+import PrivateRoutes from './privateRoutes';
 
 const routes = createBrowserRouter([
   {
@@ -33,7 +34,6 @@ const routes = createBrowserRouter([
       {
         path: 'products',
         element: <Products />,
-        loader: async () => fetch('http://localhost:5000/api/v1/product').then(res => res.json()),
       },
       {
         path: 'product/:id',
@@ -44,8 +44,23 @@ const routes = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path: 'my-profile',
-        element: <Profile />,
+        path: '*',
+        element: <h1>404</h1>,
+      },
+
+      {
+        path: '/',
+        element: <PrivateRoutes />,
+        children: [
+          {
+            path: 'my-profile',
+            element: <Profile />,
+          },
+          {
+            path: 'settings',
+            element: <h1>Settings</h1>,
+          },
+        ],
       },
     ],
   },

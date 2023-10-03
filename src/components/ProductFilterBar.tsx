@@ -10,10 +10,15 @@ import { Switch } from './ui/switch';
 export default function ProductFilterBar() {
   const { inStock, priceRange } = useAppSelector(state => state.product);
   const dispatch = useAppDispatch();
+
+  const handleToggleAvailability = () => {
+    dispatch(toggleInStock());
+  };
   const handleSlider = (value: number[]) => {
     // console.log(value);
     dispatch(setPriceRange(value[0]));
   };
+
   return (
     <div>
       <Sheet>
@@ -52,7 +57,7 @@ export default function ProductFilterBar() {
         </div>
         <div className="mt-5 space-y-8">
           <div>
-            <div className="flex items-center space-x-3" onClick={() => dispatch(toggleInStock())}>
+            <div className="flex items-center space-x-3" onClick={handleToggleAvailability}>
               <Switch id="availability" checked={inStock} />
               <Label htmlFor="availability">Availability: {inStock ? 'In stock' : 'All products'}</Label>
             </div>

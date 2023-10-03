@@ -1,5 +1,6 @@
-import { IReview } from './reviews.interface';
+import { IReview } from './review.interface';
 import { ISeller } from './seller.interface';
+import { ISubCategory } from './subCategory.interface';
 
 export interface IProduct {
   id: string;
@@ -14,7 +15,7 @@ export interface IProduct {
   warranty: string;
   createdAt: string;
   updatedAt: string;
-  subCategory: string;
+  subCategory?: ISubCategory;
   seller?: ISeller;
   reviews?: IReview[];
   quantity?: number;

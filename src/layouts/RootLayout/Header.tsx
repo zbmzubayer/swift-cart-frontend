@@ -1,3 +1,5 @@
+import { AccountDropdown } from '@/components/AccountDropdown';
+import { useAppSelector } from '@/redux/hook';
 import { AlignRight, Search, ShoppingCart, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
@@ -9,20 +11,21 @@ const navLinks = [
     path: '/products',
   },
   {
+    name: 'Store',
+    path: '/store',
+  },
+  {
     name: 'About',
     path: '/about',
   },
   {
-    name: 'Login',
-    path: '/login',
-  },
-  {
-    name: 'Sign Up',
-    path: '/sign-up',
+    name: 'Support',
+    path: '/support',
   },
 ];
 
 export default function Header() {
+  // Toggle mobile menu
   const [open, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLUListElement>(null);
   const handleClickOutside = (e: Event) => {
@@ -36,8 +39,11 @@ export default function Header() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const { user } = useAppSelector(state => state.auth);
+
   return (
-    <header className="bg-slate-200 w-full  h-20 z-20 sticky top-0">
+    <header className="flex items-center bg-slate-200 w-full h-20 z-20 sticky top-0">
       <div className="container flex justify-between items-center">
         <div>
           <Link to="/" className="flex gap-2 items-center">
@@ -55,7 +61,7 @@ export default function Header() {
             <Search />
           </button>
         </form>
-        <nav className="flex">
+        <nav className="flex items-center">
           <ul className="hidden sm:flex items-center gap-3 font-medium">
             {navLinks.map(({ name, path }) => (
               <li key={path}>
@@ -69,7 +75,22 @@ export default function Header() {
                 </NavLink>
               </li>
             ))}
+            {!user && (
+              <>
+                <li>
+                  <NavLink
+                    to="/login"
+                    className={({ isActive }) =>
+                      `${isActive && 'text-amber-700'} px-3 py-2 rounded-lg hover:bg-amber-900 hover:text-slate-200 `
+                    }
+                  >
+                    Login
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
+          {user && <AccountDropdown />}
           <Link to="/cart" className="p-3 rounded-xl text-amber-700 hover:bg-amber-900 hover:text-white">
             <ShoppingCart size={30} className="inline-block" />
           </Link>

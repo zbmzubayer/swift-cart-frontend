@@ -24,6 +24,11 @@ const cartSlice = createSlice({
         state.products.push({ ...action.payload, quantity: 1 });
       }
       state.total += action.payload.price;
+      const productCart: { [key: string]: number } = {};
+      state.products.map(product => {
+        productCart[product.id] = product.quantity!;
+      });
+      localStorage.setItem('cart', JSON.stringify(productCart));
     },
     decreaseQuantity: (state, action: PayloadAction<IProduct>) => {
       const isExist = state.products.find(product => product.id === action.payload.id);
@@ -35,6 +40,12 @@ const cartSlice = createSlice({
     removeFromCart: (state, action: PayloadAction<IProduct>) => {
       state.products = state.products.filter(product => product.id !== action.payload.id);
       state.total -= action.payload.price * action.payload.quantity!;
+    },
+    getCart: (state, action: PayloadAction<IProduct[]>) => {
+      state.products = action.payload;
+      state.total = action.payload.reduce((total, product) => {
+        return (total += product.price * product.quantity!);
+      }, 0);
     },
   },
 });

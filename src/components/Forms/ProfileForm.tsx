@@ -2,6 +2,8 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
+import { useUpdateCustomerMutation } from '@/redux/features/customer/customerAPi';
+import { useAppSelector } from '@/redux/hook';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
@@ -14,8 +16,8 @@ import { Textarea } from '../ui/textarea';
 
 const formSchema = z.object({
   email: z.string({ required_error: 'Email is required' }).email(),
-  name: z.string().optional(),
-  phone: z.string().optional(),
+  name: z.string(),
+  phone: z.string(),
   gender: z.string().optional(),
   dob: z.coerce.date().optional(),
   address: z.string().optional(),
@@ -23,16 +25,28 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-const defaultValues: Partial<FormValues> = {};
-
 export default function ProfileForm() {
+  const { user } = useAppSelector(state => state.auth);
+  const defaultValues: Partial<FormValues> = {
+    email: user?.email,
+    name: user?.customer?.name,
+    phone: user?.customer?.phone,
+    gender: user?.customer?.gender || undefined,
+    dob: user?.customer?.dob || undefined,
+    address: user?.customer?.address || undefined,
+  };
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues,
     mode: 'onBlur',
   });
+
+  const [updateCustomer, { isLoading }] = useUpdateCustomerMutation();
+
   const onSubmit = async (data: FormValues) => {
     console.log(data);
+    const res = await updateCustomer({ id: user?.customer?.id, ...data });
+    console.log(res);
   };
   return (
     <div className="grid gap-4 border border-amber-700 rounded-lg px-10 pt-5 pb-10">
@@ -51,7 +65,7 @@ export default function ProfileForm() {
                   <FormMessage />
                 </div>
                 <FormControl>
-                  <Input placeholder="Email" {...field} />
+                  <Input placeholder="Email" {...field} readOnly />
                 </FormControl>
               </FormItem>
             )}

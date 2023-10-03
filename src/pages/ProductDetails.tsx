@@ -6,17 +6,18 @@ export default function ProductDetails() {
   const { id } = useParams();
   const { data, isLoading } = useGetProductByIdQuery(id!);
   const product: IProduct = data?.data;
+  console.log(product?.subCategory);
 
   if (isLoading) return <div className="text-center">Loading...</div>;
   return (
     <div className="space-y-8">
-      <div className="flex gap-10">
-        <div className="m-1 p-1 bg-white rounded-md border">
-          <img src={product?.image} alt={product?.name} className="h-[350px] w-[350px] object-contain" />
+      <div className="grid grid-cols-3 gap-10 bg-gray-400">
+        <div className="flex justify-center items-center p-1 bg-white rounded-md border">
+          <img src={product?.image} alt={product?.name} className="h-[350px] aspect-square object-contain" />
         </div>
-        <div>
+        <div className="col-span-2">
           <h1 className="text-2xl font-medium">{product?.name}</h1>
-          <Link to={`store/${product?.seller?.id}`} className="text-cyan-600 hover:underline hover:underline-offset-2">
+          <Link to={`/store/${product?.seller?.id}`} className="text-cyan-600 hover:underline hover:underline-offset-2">
             Visit the {product?.seller?.companyName} Store
           </Link>
           <div>

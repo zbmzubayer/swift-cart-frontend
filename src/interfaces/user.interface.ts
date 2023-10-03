@@ -1,4 +1,4 @@
-import { ISeller } from './seller.interface';
+import { ICustomer, ISeller } from '.';
 
 export interface IUser {
   id: string;
@@ -7,5 +7,6 @@ export interface IUser {
   role: string;
   createdAt: Date;
   updatedAt: Date;
+  customer?: ICustomer;
   seller?: ISeller;
 }
