@@ -30,7 +30,7 @@ export function AccountDropdown() {
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link to="/my-profile">
+        <Link to="/customer/profile">
           <DropdownMenuItem>Profile</DropdownMenuItem>
         </Link>
         <DropdownMenuItem onClick={handleLogout}>

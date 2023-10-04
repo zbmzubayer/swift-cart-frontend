@@ -1,14 +1,13 @@
-import { Toaster } from '@/components/ui/toaster';
 import { setLoading, setUser } from '@/redux/features/auth/authSlice';
 import { useGetUserByIdQuery } from '@/redux/features/user/userApi';
 import { useAppDispatch } from '@/redux/hook';
 import { getUserByToken } from '@/services/auth.service';
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import Footer from './Footer';
-import Header from './Header';
+import AdminFooter from './AdminFooter';
+import AdminHeader from './AdminHeader';
 
-export default function RootLayout() {
+export default function AdminLayout() {
   let userId = null;
   const tokenPayload = getUserByToken();
   if (tokenPayload) userId = tokenPayload.id;
@@ -33,12 +32,11 @@ export default function RootLayout() {
 
   return (
     <>
-      <Header />
+      <AdminHeader />
       <main className="container min-h-screen">
         <Outlet />
-        <Toaster />
       </main>
-      <Footer />
+      <AdminFooter />
     </>
   );
 }

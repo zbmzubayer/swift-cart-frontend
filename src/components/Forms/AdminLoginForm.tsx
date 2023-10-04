@@ -27,7 +27,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const defaultValues: Partial<FormValues> = {};
 
-export default function LoginForm() {
+export default function AdminLoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const [loginUser, { isLoading: isLoading1 }] = useLoginMutation();
@@ -71,13 +71,13 @@ export default function LoginForm() {
   const { user } = useAppSelector(state => state.auth);
   useEffect(() => {
     if (user) {
-      navigate('/');
+      navigate('/admin/dashboard');
     }
   }, [user, navigate]);
 
   return (
     <div className="w-[400px] grid gap-4 border-2 border-amber-700 rounded-xl px-10 pt-5 pb-10">
-      <h1 className="text-3xl font-bold text-center text-amber-900">Login</h1>
+      <h1 className="text-3xl font-bold text-center text-amber-900">Admin Login</h1>
       <p className="text-center">Login to your account</p>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>

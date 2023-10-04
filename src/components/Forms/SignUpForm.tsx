@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useCreateCustomerMutation } from '@/redux/features/customer/customerAPi';
+import { useCreateCustomerMutation } from '@/redux/features/customer/customerApi';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Eye, EyeOff } from 'lucide-react';
 import { useEffect, useState } from 'react';
