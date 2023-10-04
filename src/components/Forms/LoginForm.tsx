@@ -3,7 +3,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { Input } from '@/components/ui/input';
 import { tokenKey } from '@/constants/storageKeys';
 import { useLoginMutation } from '@/redux/features/auth/authApi';
-import { setUser } from '@/redux/features/auth/authSlice';
+import { setLoading, setUser } from '@/redux/features/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { getUserByToken } from '@/services/auth.service';
 import { setToLocalStorage } from '@/utils/local-storage';
@@ -58,6 +58,8 @@ export default function LoginForm() {
       const data = await res2.json();
       console.log(data);
       dispatch(setUser(data?.data));
+      dispatch(setLoading(false));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast({
         title: 'Login Failed',

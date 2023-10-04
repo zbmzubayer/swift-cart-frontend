@@ -2,6 +2,13 @@ import { api } from '@/redux/api/apiSlice';
 
 const customerApi = api.injectEndpoints({
   endpoints: builder => ({
+    createCustomer: builder.mutation({
+      query: payload => ({
+        url: '/user/create-customer',
+        method: 'POST',
+        body: payload,
+      }),
+    }),
     getCustomers: builder.query({
       query: () => '/customer',
     }),
@@ -18,4 +25,5 @@ const customerApi = api.injectEndpoints({
   }),
 });
 
-export const { useGetCustomersQuery, useGetCustomerByIdQuery, useUpdateCustomerMutation } = customerApi;
+export const { useCreateCustomerMutation, useGetCustomersQuery, useGetCustomerByIdQuery, useUpdateCustomerMutation } =
+  customerApi;

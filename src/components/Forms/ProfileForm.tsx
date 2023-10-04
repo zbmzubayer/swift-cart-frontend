@@ -15,7 +15,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Textarea } from '../ui/textarea';
 
 const formSchema = z.object({
-  email: z.string({ required_error: 'Email is required' }).email(),
   name: z.string(),
   phone: z.string(),
   gender: z.string().optional(),
@@ -28,7 +27,6 @@ type FormValues = z.infer<typeof formSchema>;
 export default function ProfileForm() {
   const { user } = useAppSelector(state => state.auth);
   const defaultValues: Partial<FormValues> = {
-    email: user?.email,
     name: user?.customer?.name,
     phone: user?.customer?.phone,
     gender: user?.customer?.gender || undefined,
@@ -55,7 +53,7 @@ export default function ProfileForm() {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 lg:max-w-md">
-          <FormField
+          {/* <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
@@ -69,7 +67,7 @@ export default function ProfileForm() {
                 </FormControl>
               </FormItem>
             )}
-          />
+          /> */}
           <FormField
             control={form.control}
             name="name"

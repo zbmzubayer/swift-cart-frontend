@@ -12,8 +12,13 @@ export default function RootLayout() {
   let userId = null;
   const tokenPayload = getUserByToken();
   if (tokenPayload) userId = tokenPayload.id;
-  const { data, isLoading } = useGetUserByIdQuery(userId!, { skip: !userId });
+  const { data, isLoading, isError } = useGetUserByIdQuery(userId!, { skip: !userId });
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setLoading(true));
+    if (isError) dispatch(setLoading(false));
+  }, [dispatch, isError]);
 
   useEffect(() => {
     if (!isLoading && data) {

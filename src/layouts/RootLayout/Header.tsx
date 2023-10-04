@@ -87,6 +87,16 @@ export default function Header() {
                     Login
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink
+                    to="/sign-up"
+                    className={({ isActive }) =>
+                      `${isActive && 'text-amber-700'} px-3 py-2 rounded-lg hover:bg-amber-900 hover:text-slate-200 `
+                    }
+                  >
+                    Sign Up
+                  </NavLink>
+                </li>
               </>
             )}
           </ul>
