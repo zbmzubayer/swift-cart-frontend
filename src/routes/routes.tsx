@@ -9,7 +9,7 @@ import Profile from '@/pages/Profile';
 import SignUp from '@/pages/SignUp';
 import AdminDashboard from '@/pages/admin/AdminDashboard';
 import AdminPage from '@/pages/admin/AdminPage';
-import UsersListPage from '@/pages/admin/UsersListPage';
+import UsersListPage from '@/pages/admin/UserListPage';
 import { createBrowserRouter } from 'react-router-dom';
 import RootLayout from '../layouts/RootLayout/RootLayout';
 import PrivateRoutes from './privateRoutes';
