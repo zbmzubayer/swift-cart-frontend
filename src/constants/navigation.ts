@@ -32,8 +32,8 @@ const adminNavLinks: NavLinks[] = [
     path: '/admin/products',
   },
   {
-    name: 'Orders',
-    path: '/admin/orders',
+    name: 'User',
+    path: '/admin/users',
   },
   {
     name: 'Customers',

@@ -4,11 +4,13 @@ import authReducer from './features/auth/authSlice';
 import cartReducer from './features/cart/cartSlice';
 import demoSlice from './features/product/demoSlice';
 import productReducer from './features/product/productSlice';
+import userFilterReducer from './features/user/userFilterSlice';
 
 export const store = configureStore({
   reducer: {
     demo: demoSlice,
     auth: authReducer,
+    user: userFilterReducer,
     cart: cartReducer,
     product: productReducer,
     [api.reducerPath]: api.reducer,

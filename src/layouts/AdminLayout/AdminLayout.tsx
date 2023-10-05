@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@/contexts/theme-provider';
 import { setLoading, setUser } from '@/redux/features/auth/authSlice';
 import { useGetUserByIdQuery } from '@/redux/features/user/userApi';
 import { useAppDispatch } from '@/redux/hook';
@@ -32,11 +33,13 @@ export default function AdminLayout() {
 
   return (
     <>
-      <AdminHeader />
-      <main className="container min-h-screen">
-        <Outlet />
-      </main>
-      <AdminFooter />
+      <ThemeProvider>
+        <AdminHeader />
+        <main className="container min-h-screen">
+          <Outlet />
+        </main>
+        <AdminFooter />
+      </ThemeProvider>
     </>
   );
 }
