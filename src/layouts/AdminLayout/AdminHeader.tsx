@@ -26,7 +26,7 @@ export default function AdminHeader() {
   const { user } = useAppSelector(state => state.auth);
 
   return (
-    <header className="flex items-center w-full h-20 z-20 sticky top-0">
+    <header className="flex items-center bg-background w-full h-20 z-20 sticky top-0">
       <div className="container flex justify-between items-center">
         <div>
           <Link to="/" className="flex gap-2 items-center">

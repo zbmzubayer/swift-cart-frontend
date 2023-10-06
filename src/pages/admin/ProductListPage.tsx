@@ -19,8 +19,8 @@ export default function ProductListPage() {
     <div className="py-10">
       <div className="space-y-5 border-2 border-amber-900 p-3 rounded-lg">
         <div className="text-center">
-          <h1 className="text-2xl  font-bold tracking-tight">User Data Grid</h1>
-          <p className="text-muted-foreground">List of all users</p>
+          <h1 className="text-2xl  font-bold tracking-tight">Product Data Grid</h1>
+          <p className="text-muted-foreground">List of all products</p>
         </div>
         <DataTable columns={productColumns} data={products} filterFields={productFilterFields} />
       </div>
