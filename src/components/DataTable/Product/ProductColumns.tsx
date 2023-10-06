@@ -1,21 +1,11 @@
 import { Checkbox } from '@/components/ui/checkbox';
-import { IUser } from '@/interfaces';
-import { AvatarIcon } from '@radix-ui/react-icons';
+import { IProduct } from '@/interfaces';
 import { ColumnDef } from '@tanstack/react-table';
 import DataTableColumnHeader from '../DataTableColumnHeader';
 import { DataTableRowActions } from '../DataTableRowActions';
-import UserCellHoverCard from './UserCellHoverCard';
+import ProductCellHoverCard from './ProductCellHoverCard';
 
-export type AllUser = IUser & {
-  image?: string;
-  name: string;
-  phone: string;
-  gender?: string;
-  dob?: Date;
-  address?: string;
-};
-
-export const userColumns: ColumnDef<AllUser>[] = [
+export const productColumns: ColumnDef<IProduct>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -40,36 +30,44 @@ export const userColumns: ColumnDef<AllUser>[] = [
   {
     accessorKey: 'id',
     header: ({ column }) => <DataTableColumnHeader column={column} title={'ID'} />,
-    cell: ({ row }) => <UserCellHoverCard data={row.original} />,
+    cell: ({ row }) => <ProductCellHoverCard data={row.original} />,
   },
   {
     accessorKey: 'image',
-    header: 'Avatar',
-    cell: props =>
-      props.getValue() ? (
-        <img src={`${props.getValue()}`} alt="avatar" className="w-10 h-10 rounded-full hover:scale-150" />
-      ) : (
-        <AvatarIcon className="w-10 h-10" />
-      ),
+    header: 'Picture',
+    cell: props => (
+      <img src={`${props.getValue()}`} alt="product picture" className="w-10 h-10 rounded-sm hover:scale-150" />
+    ),
   },
   {
     accessorKey: 'name',
     header: ({ column }) => <DataTableColumnHeader column={column} title={'Name'} />,
   },
-
   {
-    accessorKey: 'email',
-    header: ({ column }) => <DataTableColumnHeader column={column} title={'Email'} />,
+    accessorKey: 'companyName',
+    header: ({ column }) => <DataTableColumnHeader column={column} title={'Company'} />,
   },
   {
-    accessorKey: 'role',
-    header: ({ column }) => <DataTableColumnHeader column={column} title={'Role'} />,
+    accessorKey: 'stock',
+    header: ({ column }) => <DataTableColumnHeader column={column} title={'Stock'} />,
+  },
+  {
+    accessorKey: 'status',
+    header: ({ column }) => <DataTableColumnHeader column={column} title={'Status'} />,
     filterFn: (row, id, value) => value.includes(row.getValue(id)),
   },
   {
-    accessorKey: 'gender',
-    header: ({ column }) => <DataTableColumnHeader column={column} title={'Gender'} />,
+    accessorKey: 'warranty',
+    header: ({ column }) => <DataTableColumnHeader column={column} title={'Warranty'} />,
     filterFn: (row, id, value) => value.includes(row.getValue(id)),
+  },
+  {
+    accessorKey: 'soldCount',
+    header: ({ column }) => <DataTableColumnHeader column={column} title={'Sold Count'} />,
+  },
+  {
+    accessorKey: 'price',
+    header: ({ column }) => <DataTableColumnHeader column={column} title={'Price'} />,
   },
   {
     id: 'actions',

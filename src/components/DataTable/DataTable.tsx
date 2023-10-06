@@ -1,4 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { FilterField } from '@/constants/filterFields';
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -19,9 +20,10 @@ import { DataTableToolbar } from './DataTableToolbar';
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  filterFields?: FilterField[];
 }
 
-export default function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+export default function DataTable<TData, TValue>({ columns, data, filterFields }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({});
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -51,7 +53,7 @@ export default function DataTable<TData, TValue>({ columns, data }: DataTablePro
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} filterFields={filterFields} />
       <div className="rounded-md border-2">
         <Table>
           <TableHeader>

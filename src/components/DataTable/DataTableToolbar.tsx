@@ -4,15 +4,16 @@ import { Table } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-import { userGenders, userRoles } from '@/constants/data';
+import { FilterField } from '@/constants/filterFields';
 import { DataTableFacetedFilter } from './DataTableFacetedFilter';
 import { DataTableViewOptions } from './DataTableViewOptions';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
+  filterFields?: FilterField[];
 }
 
-export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
+export function DataTableToolbar<TData>({ table, filterFields }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
@@ -24,12 +25,15 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
           onChange={event => table.getColumn('name')?.setFilterValue(event.target.value)}
           className="h-8 w-[150px] lg:w-[250px]"
         />
-        {table.getColumn('role') && (
-          <DataTableFacetedFilter column={table.getColumn('role')} title="Role" options={userRoles} />
-        )}
-        {table.getColumn('gender') && (
-          <DataTableFacetedFilter column={table.getColumn('gender')} title="Gender" options={userGenders} />
-        )}
+
+        {filterFields?.map(field => (
+          <DataTableFacetedFilter
+            key={field.column}
+            column={table.getColumn(field.column)}
+            title={field.title}
+            options={field.options}
+          />
+        ))}
         {isFiltered && (
           <Button variant="ghost" onClick={() => table.resetColumnFilters()} className="h-8 px-2 lg:px-3">
             Reset

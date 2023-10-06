@@ -1,5 +1,6 @@
 import DataTable from '@/components/DataTable/DataTable';
-import { columns } from '@/components/DataTable/User/UserColumns';
+import { userColumns } from '@/components/DataTable/User/UserColumns';
+import { userFilterFields } from '@/constants/filterFields';
 import { IUser } from '@/interfaces';
 import { useGetAllUsersQuery } from '@/redux/features/user/userApi';
 
@@ -22,7 +23,6 @@ export default function UserListPage() {
   }
 
   if (isLoading) return <div>Loading...</div>;
-
   return (
     <div className="py-10">
       <div className="space-y-5 border-2 border-amber-900 p-3 rounded-lg">
@@ -30,7 +30,7 @@ export default function UserListPage() {
           <h1 className="text-2xl  font-bold tracking-tight">User Data Grid</h1>
           <p className="text-muted-foreground">List of all users</p>
         </div>
-        <DataTable columns={columns} data={users} />
+        <DataTable columns={userColumns} data={users} filterFields={userFilterFields} />
       </div>
     </div>
   );
