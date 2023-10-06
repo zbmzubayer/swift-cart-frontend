@@ -2,10 +2,20 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { IUser } from '@/interfaces';
 import { AvatarIcon } from '@radix-ui/react-icons';
 import { ColumnDef } from '@tanstack/react-table';
-import DataTableColumnHeader from './DataTableColumnHeader';
-import { DataTableRowActions } from './DataTableRowActions';
+import DataTableColumnHeader from '../DataTableColumnHeader';
+import { DataTableRowActions } from '../DataTableRowActions';
+import UserCellHoverCard from './UserCellHoverCard';
 
-export const columns: ColumnDef<IUser>[] = [
+export type AllUser = IUser & {
+  image?: string;
+  name: string;
+  phone: string;
+  gender?: string;
+  dob?: Date;
+  address?: string;
+};
+
+export const columns: ColumnDef<AllUser>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -30,13 +40,14 @@ export const columns: ColumnDef<IUser>[] = [
   {
     accessorKey: 'id',
     header: ({ column }) => <DataTableColumnHeader column={column} title={'ID'} />,
+    cell: ({ row }) => <UserCellHoverCard data={row.original} />,
   },
   {
     accessorKey: 'image',
     header: 'Avatar',
-    cell: info =>
-      info.getValue() ? (
-        <img src={`${info.getValue()}`} alt="avatar" className="w-10 h-10 rounded-full hover:scale-150" />
+    cell: props =>
+      props.getValue() ? (
+        <img src={`${props.getValue()}`} alt="avatar" className="w-10 h-10 rounded-full hover:scale-150" />
       ) : (
         <AvatarIcon className="w-10 h-10" />
       ),

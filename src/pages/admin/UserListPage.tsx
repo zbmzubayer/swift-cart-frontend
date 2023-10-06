@@ -1,5 +1,5 @@
 import DataTable from '@/components/DataTable/DataTable';
-import { columns } from '@/components/DataTable/UserColumns';
+import { columns } from '@/components/DataTable/User/UserColumns';
 import { IUser } from '@/interfaces';
 import { useGetAllUsersQuery } from '@/redux/features/user/userApi';
 

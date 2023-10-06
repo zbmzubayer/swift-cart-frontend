@@ -22,20 +22,25 @@ interface DataTableProps<TData, TValue> {
 }
 
 export default function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+  const [rowSelection, setRowSelection] = useState({});
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  // const {sorting, columnFilters} = useAppSelector(state => state.user);
+  // const { sorting } = useAppSelector(state => state.userFilter);
   // const dispatch = useAppDispatch();
 
   const table = useReactTable({
     data,
     columns,
     state: {
+      rowSelection,
       sorting,
       columnFilters,
     },
+    enableRowSelection: true,
+    columnResizeMode: 'onChange',
+    onRowSelectionChange: setRowSelection,
+    onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
-    onSortingChange: () => setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
