@@ -36,7 +36,9 @@ export const productColumns: ColumnDef<IProduct>[] = [
     accessorKey: 'image',
     header: 'Picture',
     cell: props => (
-      <img src={`${props.getValue()}`} alt="product picture" className="w-10 h-10 rounded-sm hover:scale-150" />
+      <div className="flex justify-center items-center p-1 bg-white rounded-sm border hover:scale-150">
+        <img src={`${props.getValue()}`} alt="product picture" className="w-12 h-12 object-contain" />
+      </div>
     ),
   },
   {
