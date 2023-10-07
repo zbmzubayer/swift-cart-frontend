@@ -9,6 +9,7 @@ import ProductDetails from '@/pages/ProductDetails';
 import Products from '@/pages/Products';
 import Profile from '@/pages/Profile';
 import SignUp from '@/pages/SignUp';
+import Support from '@/pages/Support';
 import AdminDashboard from '@/pages/admin/AdminDashboard';
 import AdminPage from '@/pages/admin/AdminPage';
 import ProductListPage from '@/pages/admin/ProductListPage';
@@ -23,6 +24,7 @@ const routes = createBrowserRouter([
     children: [
       { path: '', element: <Home /> },
       { path: 'about', element: <About /> },
+      { path: 'support', element: <Support /> },
       { path: 'login', element: <Login /> },
       { path: 'sign-up', element: <SignUp /> },
       { path: 'products', element: <Products /> },
