@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { ReloadIcon } from '@radix-ui/react-icons';
 
 interface Props {
-  title: string;
+  title?: string;
   className?: string;
 }
 

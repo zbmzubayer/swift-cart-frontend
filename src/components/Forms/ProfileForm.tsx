@@ -9,6 +9,7 @@ import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
+import { ButtonLoading } from '../Buttons/ButtonLoading';
 import { Calendar } from '../ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
@@ -169,9 +170,13 @@ export default function ProfileForm() {
               </FormItem>
             )}
           />
-          <Button variant={'brand'} type="submit">
-            Update Profile
-          </Button>
+          {!isLoading ? (
+            <Button variant={'brand'} type="submit">
+              Update Profile
+            </Button>
+          ) : (
+            <ButtonLoading title="Saving changes" />
+          )}
         </form>
       </Form>
     </div>
