@@ -14,9 +14,4 @@ const getUserByToken = () => {
   return null;
 };
 
-const isLoggedIn = () => {
-  const authToken = getFromLocalStorage(tokenKey);
-  return !!authToken;
-};
-
-export { getUserByToken, isLoggedIn };
+export { getUserByToken };

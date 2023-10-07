@@ -1,6 +1,6 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { Row } from '@tanstack/react-table';
-import { PencilIcon, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -26,14 +26,9 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>
-          Edit
-          <DropdownMenuShortcut>
-            <PencilIcon className="h-4 w-4" />
-          </DropdownMenuShortcut>
-        </DropdownMenuItem>
+        <DropdownMenuItem>Edit</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="bg-red-400">
+        <DropdownMenuItem>
           Delete
           <DropdownMenuShortcut>
             <Trash2 className="h-4 w-4" />

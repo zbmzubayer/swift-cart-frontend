@@ -4,6 +4,7 @@ import About from '@/pages/About';
 import Cart from '@/pages/Cart';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
+import NotFound from '@/pages/NotFound';
 import ProductDetails from '@/pages/ProductDetails';
 import Products from '@/pages/Products';
 import Profile from '@/pages/Profile';
@@ -27,7 +28,7 @@ const routes = createBrowserRouter([
       { path: 'products', element: <Products /> },
       { path: 'product/:id', element: <ProductDetails /> },
       { path: 'cart', element: <Cart /> },
-      { path: '*', element: <h1>404</h1> },
+      { path: '*', element: <NotFound /> },
       {
         path: 'customer',
         element: <PrivateRoutes />,
@@ -46,7 +47,7 @@ const routes = createBrowserRouter([
       { path: 'dashboard', element: <AdminDashboard /> },
       { path: 'users', element: <UsersListPage /> },
       { path: 'products', element: <ProductListPage /> },
-      { path: '*', element: <h1>404</h1> },
+      { path: '*', element: <NotFound /> },
     ],
   },
 ]);

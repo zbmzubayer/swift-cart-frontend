@@ -33,7 +33,8 @@ export const productColumns: ColumnDef<IProduct>[] = [
     cell: ({ row }) => <ProductCellHoverCard data={row.original} />,
   },
   {
-    accessorKey: 'image',
+    accessorKey: 'picture',
+    accessorFn: row => row.image,
     header: 'Picture',
     cell: props => (
       <div className="flex justify-center items-center p-1 bg-white rounded-sm border hover:scale-150">
@@ -64,12 +65,14 @@ export const productColumns: ColumnDef<IProduct>[] = [
     filterFn: (row, id, value) => value.includes(row.getValue(id)),
   },
   {
-    accessorKey: 'soldCount',
+    accessorKey: 'Sold Count',
+    accessorFn: row => row.soldCount,
     header: ({ column }) => <DataTableColumnHeader column={column} title={'Sold Count'} />,
   },
   {
     accessorKey: 'price',
     header: ({ column }) => <DataTableColumnHeader column={column} title={'Price'} />,
+    cell: ({ getValue }) => <p className="font-semibold text-right">${`${getValue()}`}</p>,
   },
   {
     id: 'actions',

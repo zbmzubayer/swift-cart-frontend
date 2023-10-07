@@ -16,6 +16,7 @@ export default function Products() {
   }
 
   if (isLoading) return <div className="text-center">Loading...</div>;
+
   return (
     <div className="mt-5 flex flex-col justify-between lg:flex-row">
       <div className="mb-5">

@@ -61,8 +61,15 @@ export default function DataTable<TData, TValue>({ columns, data, filterFields }
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className={`border`}>
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                      {/* <div
+                        onMouseDown={header.getResizeHandler()}
+                        onTouchStart={header.getResizeHandler()}
+                        className="absolute h-full left-0 top-0 w-1 bg-slate-600 cursor-col-resize"
+                      >
+                        ss
+                      </div> */}
                     </TableHead>
                   );
                 })}
@@ -74,7 +81,9 @@ export default function DataTable<TData, TValue>({ columns, data, filterFields }
               table.getRowModel().rows.map(row => (
                 <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                   {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    <TableCell key={cell.id} className={`border text-center`}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
                   ))}
                 </TableRow>
               ))

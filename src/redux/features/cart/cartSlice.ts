@@ -1,4 +1,5 @@
 import { IProduct } from '@/interfaces/product.interface';
+import { setCartToLocalStorage } from '@/services/cartService';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -24,11 +25,7 @@ const cartSlice = createSlice({
         state.products.push({ ...action.payload, quantity: 1 });
       }
       state.total += action.payload.price;
-      const productCart: { [key: string]: number } = {};
-      state.products.map(product => {
-        productCart[product.id] = product.quantity!;
-      });
-      localStorage.setItem('cart', JSON.stringify(productCart));
+      setCartToLocalStorage(state.products);
     },
     decreaseQuantity: (state, action: PayloadAction<IProduct>) => {
       const isExist = state.products.find(product => product.id === action.payload.id);
@@ -36,20 +33,22 @@ const cartSlice = createSlice({
         isExist.quantity! -= 1;
         state.total -= action.payload.price;
       }
+      setCartToLocalStorage(state.products);
     },
     removeFromCart: (state, action: PayloadAction<IProduct>) => {
       state.products = state.products.filter(product => product.id !== action.payload.id);
       state.total -= action.payload.price * action.payload.quantity!;
+      setCartToLocalStorage(state.products);
     },
-    getCart: (state, action: PayloadAction<IProduct[]>) => {
+    getCart: (state, action: PayloadAction<IProduct[] | []>) => {
       state.products = action.payload;
-      state.total = action.payload.reduce((total, product) => {
-        return (total += product.price * product.quantity!);
-      }, 0);
+      state.products.map(product => {
+        state.total += product.price * product.quantity!;
+      });
     },
   },
 });
 
-export const { addToCart, decreaseQuantity, removeFromCart } = cartSlice.actions;
+export const { getCart, addToCart, decreaseQuantity, removeFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

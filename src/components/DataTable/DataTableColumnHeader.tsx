@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { CaretSortIcon } from '@radix-ui/react-icons';
 import { Column } from '@tanstack/react-table';
-import { ArrowDownIcon, ArrowUpIcon, EyeOff } from 'lucide-react';
+import { ArrowDownIcon, ArrowUpIcon, EyeOff, XCircle } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -31,7 +31,7 @@ export default function DataTableColumnHeader<TData, TValue>({
     <div className={cn('flex items-center space-x-2', className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="-ml-3 h-8 data-[state=open]:bg-accent">
+          <Button variant="ghost" className="data-[state=open]:bg-accent">
             <span>{title}</span>
             {column.getIsSorted() === 'desc' ? (
               <ArrowDownIcon className="ml-2 h-4 w-4" />
@@ -50,6 +50,10 @@ export default function DataTableColumnHeader<TData, TValue>({
           <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
             <ArrowDownIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             Desc
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => column.clearSorting()}>
+            <XCircle className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+            None
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
