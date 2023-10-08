@@ -17,7 +17,7 @@ export default function UserCellHoverCard({ data }: { data: AllUser }) {
         <Button variant={'link'}>{id}</Button>
       </HoverCardTrigger>
       <HoverCardContent className="w-96">
-        <div className="flex justify-between space-x-4">
+        <div className="flex justify-center space-x-4 text-start">
           <div className="flex-shrink-0">
             {image ? (
               <img className="h-20 w-20 rounded-full" src={image} alt="user photo" />
@@ -28,7 +28,10 @@ export default function UserCellHoverCard({ data }: { data: AllUser }) {
           <div className="space-y-1">
             <div>
               <h4 className="text-base font-semibold">{name}</h4>
-              <a href={`mailto:${email}`} className="text-muted-foreground underline-offset-2 hover:underline">
+              <a
+                href={`mailto:${email}`}
+                className="text-muted-foreground underline-offset-2 hover:text-indigo-600 hover:underline"
+              >
                 {email}
               </a>
             </div>

@@ -39,6 +39,7 @@ export default function DataTable<TData, TValue>({ columns, data, filterFields }
       columnFilters,
     },
     enableRowSelection: true,
+    enableColumnResizing: true,
     columnResizeMode: 'onChange',
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
@@ -56,20 +57,20 @@ export default function DataTable<TData, TValue>({ columns, data, filterFields }
       <DataTableToolbar table={table} filterFields={filterFields} />
       <div className="rounded-md border-2">
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-gray-300">
             {table.getHeaderGroups().map(headerGroup => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header => {
                   return (
-                    <TableHead key={header.id} className={`border`}>
+                    <TableHead key={header.id}>
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                       {/* <div
-                        onMouseDown={header.getResizeHandler()}
-                        onTouchStart={header.getResizeHandler()}
-                        className="absolute h-full left-0 top-0 w-1 bg-slate-600 cursor-col-resize"
-                      >
-                        ss
-                      </div> */}
+                          onMouseDown={header.getResizeHandler()}
+                          onTouchStart={header.getResizeHandler()}
+                          className="absolute h-full left-0 top-0 w-1 bg-slate-600 cursor-col-resize"
+                        >
+                          ss
+                        </div> */}
                     </TableHead>
                   );
                 })}
@@ -81,8 +82,8 @@ export default function DataTable<TData, TValue>({ columns, data, filterFields }
               table.getRowModel().rows.map(row => (
                 <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                   {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id} className={`border text-center`}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    <TableCell key={cell.id} className="border">
+                      <div>{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>
                     </TableCell>
                   ))}
                 </TableRow>

@@ -23,7 +23,6 @@ export const userColumns: ColumnDef<AllUser>[] = [
         checked={table.getIsAllPageRowsSelected()}
         onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
-        className="translate-y-[2px]"
       />
     ),
     cell: ({ row }) => (
@@ -31,7 +30,6 @@ export const userColumns: ColumnDef<AllUser>[] = [
         checked={row.getIsSelected()}
         onCheckedChange={value => row.toggleSelected(!!value)}
         aria-label="Select row"
-        className="translate-y-[2px]"
       />
     ),
     enableSorting: false,
@@ -69,6 +67,13 @@ export const userColumns: ColumnDef<AllUser>[] = [
   {
     accessorKey: 'gender',
     header: ({ column }) => <DataTableColumnHeader column={column} title={'Gender'} />,
+    filterFn: (row, id, value) => value.includes(row.getValue(id)),
+  },
+  {
+    accessorKey: 'Joined',
+    accessorFn: row => row.createdAt,
+    header: ({ column }) => <DataTableColumnHeader column={column} title={'Joined'} />,
+    cell: ({ row }) => <span>{new Date(row.original.createdAt).toDateString()}</span>,
     filterFn: (row, id, value) => value.includes(row.getValue(id)),
   },
   {

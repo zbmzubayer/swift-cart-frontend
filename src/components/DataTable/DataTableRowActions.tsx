@@ -18,7 +18,7 @@ interface DataTableRowActionsProps<TData> {
 }
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
-  const rowData = row.original as any;
+  const rowData: any = row.original;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,7 +28,7 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <Link to={rowData.id}>
             Edit
             <DropdownMenuShortcut>
