@@ -82,7 +82,7 @@ export default function Header() {
               </>
             )}
           </ul>
-          {user && <AccountDropdown />}
+          {user && <AccountDropdown path="/" />}
           <Link to="/cart" className="p-3 rounded-xl text-amber-700 hover:text-amber-900">
             <ShoppingCart size={30} className="inline-block" />
           </Link>

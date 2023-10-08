@@ -7,19 +7,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { tokenKey } from '@/constants/storageKeys';
 import { setUser } from '@/redux/features/auth/authSlice';
 import { useAppDispatch } from '@/redux/hook';
+import { removeFromLocalStorage } from '@/utils/local-storage';
 import { LogOut } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
-export function AccountDropdown() {
+export function AccountDropdown({ path }: { path?: string }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     dispatch(setUser(null));
-    localStorage.removeItem('token');
-    navigate('/login');
+    removeFromLocalStorage(tokenKey);
+    navigate(path || '/');
   };
 
   return (

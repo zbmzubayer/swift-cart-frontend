@@ -15,6 +15,7 @@ import AdminPage from '@/pages/admin/AdminPage';
 import ProductListPage from '@/pages/admin/ProductListPage';
 import UsersListPage from '@/pages/admin/UserListPage';
 import { createBrowserRouter } from 'react-router-dom';
+import AdminPrivateRoutes from './adminPrivateRoutes';
 import PrivateRoutes from './privateRoutes';
 
 const routes = createBrowserRouter([
@@ -46,10 +47,16 @@ const routes = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       { path: '', element: <AdminPage /> },
-      { path: 'dashboard', element: <AdminDashboard /> },
-      { path: 'users', element: <UsersListPage /> },
-      { path: 'products', element: <ProductListPage /> },
       { path: '*', element: <NotFound /> },
+      {
+        path: '',
+        element: <AdminPrivateRoutes />,
+        children: [
+          { path: 'dashboard', element: <AdminDashboard /> },
+          { path: 'users', element: <UsersListPage /> },
+          { path: 'products', element: <ProductListPage /> },
+        ],
+      },
     ],
   },
 ]);

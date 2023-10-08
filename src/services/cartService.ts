@@ -6,7 +6,7 @@ type LocalStorageCartObj = { [key: string]: number };
 
 export const getCartFromLocalStorage = (products: IProduct[]): IProduct[] | [] => {
   const cart = getFromLocalStorage(cartKey);
-  if (cart) {
+  if (products && cart) {
     const cartObj = JSON.parse(cart);
     if (typeof cartObj === 'object') {
       const cartProductIds = Object.keys(cartObj);

@@ -55,7 +55,6 @@ export default function LoginForm() {
         },
       });
       const data = await res2.json();
-      console.log(data);
       dispatch(setUser(data?.data));
       dispatch(setLoading(false));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

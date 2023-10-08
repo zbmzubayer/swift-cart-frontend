@@ -49,22 +49,8 @@ export default function AdminHeader() {
                   </NavLink>
                 </li>
               ))}
-            {!user && (
-              <>
-                <li>
-                  <NavLink
-                    to="/login"
-                    className={({ isActive }) =>
-                      `${isActive && 'text-amber-700'} px-3 py-2 rounded-lg hover:bg-amber-900 hover:text-slate-200 `
-                    }
-                  >
-                    Login
-                  </NavLink>
-                </li>
-              </>
-            )}
           </ul>
-          {user && <AccountDropdown />}
+          {user && <AccountDropdown path="/admin" />}
           <ThemeToggle />
           <div className="flex sm:hidden">
             <button className="text-orange-950" onClick={() => setIsOpen(!open)}>
