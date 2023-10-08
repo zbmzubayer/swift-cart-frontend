@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import * as React from 'react';
 import { DayPicker } from 'react-day-picker';
