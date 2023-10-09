@@ -1,3 +1,4 @@
+import LoadingScreen from '@/components/LoadingScreen';
 import { Toaster } from '@/components/ui/toaster';
 import { setLoading, setUser } from '@/redux/features/auth/authSlice';
 import { getCart } from '@/redux/features/cart/cartSlice';
@@ -38,7 +39,7 @@ export default function RootLayout() {
     }
   }, [data, isLoading, dispatch]);
 
-  if (isLoading) return <div className="loader"></div>;
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <>
