@@ -3,7 +3,7 @@ import { api } from '@/redux/api/apiSlice';
 const authApi = api.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation({
-      query: payload => ({ url: '/auth/login', method: 'POST', body: payload }),
+      query: payload => ({ url: '/auth/login', method: 'POST', body: payload, credentials: 'include' }),
       transformErrorResponse: error => {
         return error.data;
       },
@@ -14,6 +14,12 @@ const authApi = api.injectEndpoints({
         method: 'GET',
         headers: { authorization: token },
       }),
+    }),
+    getRefreshToken: builder.mutation({
+      query: () => ({ url: '/auth/refresh-token', method: 'GET', credentials: 'include' }),
+      transformErrorResponse: error => {
+        return error.data;
+      },
     }),
   }),
 });

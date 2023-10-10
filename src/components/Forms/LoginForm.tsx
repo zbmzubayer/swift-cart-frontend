@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import envConfig from '@/config';
 import { tokenKey } from '@/constants/storageKeys';
 import { useLoginMutation } from '@/redux/features/auth/authApi';
 import { setLoading, setUser } from '@/redux/features/auth/authSlice';
@@ -31,7 +32,6 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
   const [loginUser, { isLoading: isLoading1 }] = useLoginMutation();
 
   const form = useForm<FormValues>({
@@ -51,7 +51,7 @@ export default function LoginForm() {
         variant: 'success',
       });
       const userId = getUserByToken()?.id;
-      const res2 = await fetch(`http://localhost:5000/api/v1/user/${userId}`, {
+      const res2 = await fetch(`${envConfig.API_BASE_URL}/user/${userId}`, {
         headers: {
           Authorization: token!,
         },

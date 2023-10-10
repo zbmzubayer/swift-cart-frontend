@@ -2,6 +2,7 @@ import { IProduct } from '@/interfaces/product.interface';
 import { addToCart, decreaseQuantity, removeFromCart } from '@/redux/features/cart/cartSlice';
 import { useAppDispatch } from '@/redux/hook';
 import { Minus, Plus, Trash2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '../ui/button';
 
 interface IProps {
@@ -12,16 +13,12 @@ export default function CartCard({ product }: IProps) {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="max-w-2xl h-[150px] p-2 bg-slate-300 border-2 border-gray-700 rounded-lg">
-      <div className="flex items-center gap-2">
-        <div className="">
-          <img
-            src={product.image}
-            alt={`${product.name} photo`}
-            className="w-[150px] border rounded-sm object-contain"
-          />
+    <div className="max-w-2xl p-2 bg-slate-300 border border-amber-700 rounded-lg hover:shadow-lg">
+      <div className="flex items-center gap-3">
+        <div className="flex-shrink-0 p-1 bg-white border rounded-md hover:scale-125">
+          <img src={product.image} alt={`${product.name} photo`} className="w-[110px] h-[110px] object-contain" />
         </div>
-        <div>
+        <Link to={`/product/${product.id}`}>
           <h2 className="text-container font-medium">{product.name}</h2>
           <p className="font-bold">${product.price}</p>
           <div className="text-xs">
@@ -36,16 +33,16 @@ export default function CartCard({ product }: IProps) {
             </p>
             <p className="inline-block px-3 rounded-full bg-gray-400 hover:shadow-md">Quantity: {product.quantity}</p>
           </div>
-        </div>
+        </Link>
         <div className="grid gap-2">
-          <Button onClick={() => dispatch(addToCart(product))}>
-            <Plus size={25} className="h-6 w-6" />
+          <Button size="icon" onClick={() => dispatch(addToCart(product))}>
+            <Plus className="h-6 w-6" />
           </Button>
-          <Button onClick={() => dispatch(decreaseQuantity(product))}>
-            <Minus size={25} className="h-6 w-6" />
+          <Button size="icon" onClick={() => dispatch(decreaseQuantity(product))}>
+            <Minus className="h-6 w-6" />
           </Button>
-          <Button variant={'destructive'} onClick={() => dispatch(removeFromCart(product))}>
-            <Trash2 size={25} className="h-6 w-6" />
+          <Button size="icon" variant={'destructive'} onClick={() => dispatch(removeFromCart(product))}>
+            <Trash2 className="h-6 w-6" />
           </Button>
         </div>
       </div>

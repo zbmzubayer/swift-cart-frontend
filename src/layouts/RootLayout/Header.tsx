@@ -52,8 +52,8 @@ export default function Header() {
                   to={path}
                   className={({ isActive }) =>
                     `${
-                      isActive && 'text-amber-700'
-                    } px-4 py-2 rounded-full transition-all text-white hover:bg-amber-900 hover:text-slate-200`
+                      isActive ? 'text-amber-700' : 'text-white'
+                    } px-4 py-2 rounded-full transition-all hover:bg-amber-900 hover:text-slate-200`
                   }
                 >
                   {name}
