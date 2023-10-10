@@ -11,7 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Eye, EyeOff } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import z from 'zod';
 import { toast } from '../ui/use-toast';
 
@@ -30,6 +30,8 @@ const defaultValues: Partial<FormValues> = {};
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
   const [loginUser, { isLoading: isLoading1 }] = useLoginMutation();
 
   const form = useForm<FormValues>({
@@ -70,9 +72,9 @@ export default function LoginForm() {
   const { user } = useAppSelector(state => state.auth);
   useEffect(() => {
     if (user) {
-      navigate('/');
+      navigate(location.state?.path || '/');
     }
-  }, [user, navigate]);
+  }, [user, location.state, navigate]);
 
   return (
     <div className="w-[400px] grid gap-4 border-2 border-amber-700 rounded-xl px-10 pt-5 pb-10">

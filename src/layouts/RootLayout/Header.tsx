@@ -1,4 +1,4 @@
-import { AccountDropdown } from '@/components/AccountDropdown';
+import { AccountDropdown } from '@/components/Dropdowns/AccountDropdown';
 import { rootNavLinks } from '@/constants/navigation';
 import { useAppSelector } from '@/redux/hook';
 import { AlignRight, Search, ShoppingCart, X } from 'lucide-react';
@@ -23,14 +23,15 @@ export default function Header() {
   }, []);
 
   const { user } = useAppSelector(state => state.auth);
+  const { products } = useAppSelector(state => state.cart);
 
   return (
-    <header className="flex items-center bg-slate-200 w-full h-20 z-20 sticky top-0">
+    <header className="flex items-center bg-slate-900 w-full h-20 z-20 sticky top-0">
       <div className="container flex justify-between items-center">
         <div>
           <Link to="/" className="flex gap-2 items-center">
             <img src={logo} alt="swift cart logo" className="h-16 w-16" />
-            <span className="text-xl font-bold text-amber-800">Swift Cart</span>
+            <span className="text-xl font-bold text-amber-700">Swift Cart</span>
           </Link>
         </div>
         <form className="flex rounded-md group">
@@ -43,14 +44,16 @@ export default function Header() {
             <Search />
           </button>
         </form>
-        <nav className="flex items-center">
-          <ul className="hidden sm:flex items-center gap-3 font-medium">
+        <nav className="flex items-center gap-3">
+          <ul className="hidden sm:flex items-center gap-1 font-medium">
             {rootNavLinks.map(({ name, path }) => (
               <li key={path}>
                 <NavLink
                   to={path}
                   className={({ isActive }) =>
-                    `${isActive && 'text-amber-700'} px-3 py-2 rounded-lg hover:bg-amber-900 hover:text-slate-200 `
+                    `${
+                      isActive && 'text-amber-700'
+                    } px-4 py-2 rounded-full transition-all text-white hover:bg-amber-900 hover:text-slate-200`
                   }
                 >
                   {name}
@@ -58,36 +61,41 @@ export default function Header() {
               </li>
             ))}
             {!user && (
-              <>
+              <div className="px-3 py-2 flex items-center gap-2 bg-slate-300 rounded-lg">
                 <li>
                   <NavLink
                     to="/login"
-                    className={({ isActive }) =>
-                      `${isActive && 'text-amber-700'} px-3 py-2 rounded-lg hover:bg-amber-900 hover:text-slate-200 `
-                    }
+                    className={({ isActive }) => `${isActive && 'text-amber-700'} rounded-lg hover:text-amber-700`}
                   >
                     Login
                   </NavLink>
                 </li>
+                <span>|</span>
                 <li>
                   <NavLink
                     to="/sign-up"
-                    className={({ isActive }) =>
-                      `${isActive && 'text-amber-700'} px-3 py-2 rounded-lg hover:bg-amber-900 hover:text-slate-200 `
-                    }
+                    className={({ isActive }) => `${isActive && 'text-amber-700'} rounded-lg hover:text-amber-700`}
                   >
                     Sign Up
                   </NavLink>
                 </li>
-              </>
+              </div>
             )}
           </ul>
-          {user && <AccountDropdown path="/" />}
-          <Link to="/cart" className="p-3 rounded-xl text-amber-700 hover:text-amber-900">
-            <ShoppingCart size={30} className="inline-block" />
+          {user && <AccountDropdown path="/login" />}
+          <Link to="/cart" className="relative rounded-xl text-amber-700 hover:text-amber-900">
+            <ShoppingCart className="w-8 h-8" />
+            <span className="sr-only">Shopping cart</span>
+            <span
+              className={`absolute -top-3 left-3 px-1 bg-slate-300 text-xs font-semibold rounded-full ${
+                products.length && 'animate-bounce'
+              }`}
+            >
+              {products.length}
+            </span>
           </Link>
           <div className="flex sm:hidden">
-            <button className="text-orange-950" onClick={() => setIsOpen(!open)}>
+            <button className="text-orange-900" onClick={() => setIsOpen(!open)}>
               {open ? <X /> : <AlignRight />}
             </button>
             <ul
@@ -97,7 +105,7 @@ export default function Header() {
               } absolute top-20 right-0 p-1 bg-gradient-to-b from-amber-700 to-amber-500 rounded-lg mr-4 min-w-[120px]`}
             >
               {rootNavLinks.map(({ name, path }) => (
-                <li key={path} className="">
+                <li key={path}>
                   <NavLink
                     to={path}
                     className={`block pl-4 py-1 font-medium rounded-md hover:bg-amber-950 hover:text-slate-200`}
@@ -107,6 +115,27 @@ export default function Header() {
                   </NavLink>
                 </li>
               ))}
+              {!user && (
+                <div className="px-3 py-2 flex items-center gap-2 bg-slate-300 rounded-lg">
+                  <li>
+                    <NavLink
+                      to="/login"
+                      className={({ isActive }) => `${isActive && 'text-amber-700'} rounded-lg hover:text-amber-700`}
+                    >
+                      Login
+                    </NavLink>
+                  </li>
+                  <span>|</span>
+                  <li>
+                    <NavLink
+                      to="/sign-up"
+                      className={({ isActive }) => `${isActive && 'text-amber-700'} rounded-lg hover:text-amber-700`}
+                    >
+                      Sign Up
+                    </NavLink>
+                  </li>
+                </div>
+              )}
             </ul>
           </div>
         </nav>

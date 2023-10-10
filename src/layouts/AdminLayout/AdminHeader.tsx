@@ -1,4 +1,4 @@
-import { AccountDropdown } from '@/components/AccountDropdown';
+import { AccountDropdown } from '@/components/Dropdowns/AccountDropdown';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { adminNavLinks } from '@/constants/navigation';
 import { useAppSelector } from '@/redux/hook';

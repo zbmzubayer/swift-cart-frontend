@@ -57,7 +57,7 @@ export default function DataTable<TData, TValue>({ columns, data, filterFields }
       <DataTableToolbar table={table} filterFields={filterFields} />
       <div className="rounded-md border-2">
         <Table>
-          <TableHeader className="bg-gray-300">
+          <TableHeader className="bg-amber-500 dark:bg-slate-200">
             {table.getHeaderGroups().map(headerGroup => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header => {

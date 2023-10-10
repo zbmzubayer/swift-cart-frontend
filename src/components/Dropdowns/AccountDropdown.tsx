@@ -27,7 +27,9 @@ export function AccountDropdown({ path }: { path?: string }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost">Account</Button>
+        <Button variant="ghost" className="bg-slate-400">
+          Account
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>

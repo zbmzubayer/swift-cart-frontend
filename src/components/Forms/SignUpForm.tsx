@@ -80,7 +80,7 @@ export default function SignUpForm() {
   }, [isLoading, isSuccess, navigate]);
 
   return (
-    <div className="w-[480px] grid gap-4 border-2 border-amber-700 rounded-xl px-10 pt-5 pb-10">
+    <div className="w-[470px] mt-10 grid gap-4 border-2 border-amber-700 rounded-xl px-10 pt-5 pb-10">
       <h1 className="text-3xl font-bold text-center text-amber-900">Create an account</h1>
       <p className="text-center text-gray-500">Enter the information below to create your account</p>
       <Form {...form}>

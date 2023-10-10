@@ -2,6 +2,7 @@ import AdminLayout from '@/layouts/AdminLayout/AdminLayout';
 import RootLayout from '@/layouts/RootLayout/RootLayout';
 import About from '@/pages/About';
 import Cart from '@/pages/Cart';
+import Checkout from '@/pages/Checkout';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
@@ -12,6 +13,7 @@ import SignUp from '@/pages/SignUp';
 import Support from '@/pages/Support';
 import AdminDashboard from '@/pages/admin/AdminDashboard';
 import AdminPage from '@/pages/admin/AdminPage';
+import OrderListPage from '@/pages/admin/OrderListPage';
 import ProductListPage from '@/pages/admin/ProductListPage';
 import UsersListPage from '@/pages/admin/UserListPage';
 import { createBrowserRouter } from 'react-router-dom';
@@ -37,7 +39,7 @@ const routes = createBrowserRouter([
         element: <PrivateRoutes />,
         children: [
           { path: 'profile', element: <Profile /> },
-          { path: 'settings', element: <h1>Settings</h1> },
+          { path: 'checkout', element: <Checkout /> },
         ],
       },
     ],
@@ -55,6 +57,7 @@ const routes = createBrowserRouter([
           { path: 'dashboard', element: <AdminDashboard /> },
           { path: 'users', element: <UsersListPage /> },
           { path: 'products', element: <ProductListPage /> },
+          { path: 'orders', element: <OrderListPage /> },
         ],
       },
     ],

@@ -24,3 +24,12 @@ export const productWarranties = [
   { label: '2 years', value: '2 years' },
   { label: '5 years', value: '5 years' },
 ];
+
+export const orderStatuses = [
+  { label: 'Pending', value: 'Pending' },
+  { label: 'Processing', value: 'Processing' },
+  { label: 'Delivered', value: 'Delivered' },
+  { label: 'Cancelled', value: 'Cancelled' },
+  { label: 'Refunded', value: 'Refunded' },
+  { label: 'Failed', value: 'Failed' },
+];

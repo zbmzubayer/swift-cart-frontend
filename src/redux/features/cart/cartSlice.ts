@@ -1,5 +1,7 @@
+import { cartKey } from '@/constants/storageKeys';
 import { IProduct } from '@/interfaces/product.interface';
 import { setCartToLocalStorage } from '@/services/cartService';
+import { removeFromLocalStorage } from '@/utils/local-storage';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -46,9 +48,14 @@ const cartSlice = createSlice({
         state.total += product.price * product.quantity!;
       });
     },
+    clearCart: state => {
+      state.products = [];
+      state.total = 0;
+      removeFromLocalStorage(cartKey);
+    },
   },
 });
 
-export const { getCart, addToCart, decreaseQuantity, removeFromCart } = cartSlice.actions;
+export const { getCart, addToCart, decreaseQuantity, removeFromCart, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -1,4 +1,4 @@
-import { productStatuses, productWarranties, userGenders, userRoles } from './data';
+import { orderStatuses, productStatuses, productWarranties, userGenders, userRoles } from './data';
 
 export type FilterField = {
   column: string;
@@ -15,3 +15,5 @@ export const productFilterFields: FilterField[] = [
   { column: 'status', title: 'Status', options: productStatuses },
   { column: 'warranty', title: 'Warranty', options: productWarranties },
 ];
+
+export const orderFilterFields: FilterField[] = [{ column: 'status', title: 'Status', options: orderStatuses }];
