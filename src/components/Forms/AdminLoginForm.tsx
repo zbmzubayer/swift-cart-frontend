@@ -5,7 +5,7 @@ import { tokenKey } from '@/constants/storageKeys';
 import { useLoginMutation } from '@/redux/features/auth/authApi';
 import { setLoading, setUser } from '@/redux/features/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { getUserByToken } from '@/services/auth.service';
+import { getUserById, getUserByToken } from '@/services/auth.service';
 import { setToLocalStorage } from '@/utils/local-storage';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Eye, EyeOff } from 'lucide-react';
@@ -43,21 +43,23 @@ export default function AdminLoginForm() {
       const res = await loginUser(values).unwrap();
       const token = res?.data?.accessToken;
       setToLocalStorage(tokenKey, token);
-      toast({
-        title: 'Login Success',
-        description: 'You have logged in successfully',
-        variant: 'success',
-      });
       const userId = getUserByToken()?.id;
-      const res2 = await fetch(`http://localhost:5000/api/v1/user/${userId}`, {
-        headers: {
-          Authorization: token!,
-        },
-      });
-      const data = await res2.json();
-      console.log(data);
-      dispatch(setUser(data?.data));
-      dispatch(setLoading(false));
+      const userData = await getUserById(userId!, token);
+      if (userData?.data?.admin) {
+        toast({
+          title: 'Login Success',
+          description: 'You have logged in successfully',
+          variant: 'success',
+        });
+        dispatch(setUser(userData?.data));
+        dispatch(setLoading(false));
+      } else {
+        toast({
+          title: 'Login Failed',
+          description: 'You are not an admin',
+          variant: 'destructive',
+        });
+      }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast({
@@ -70,7 +72,7 @@ export default function AdminLoginForm() {
 
   const { user } = useAppSelector(state => state.auth);
   useEffect(() => {
-    if (user) {
+    if (user && user.admin) {
       navigate('/admin/dashboard');
     }
   }, [user, navigate]);

@@ -36,7 +36,7 @@ export default function AdminHeader() {
         </div>
         <nav className="flex items-center gap-3">
           <ul className="hidden sm:flex items-center gap-3 font-medium">
-            {user &&
+            {user?.admin &&
               adminNavLinks.map(({ name, path }) => (
                 <li key={path}>
                   <NavLink
@@ -49,8 +49,8 @@ export default function AdminHeader() {
                   </NavLink>
                 </li>
               ))}
+            {user?.admin && <AccountDropdown path="/admin" profileLink="admin" />}
           </ul>
-          {user && <AccountDropdown path="/admin" />}
           <ThemeToggle />
           <div className="flex sm:hidden">
             <button className="text-orange-950" onClick={() => setIsOpen(!open)}>

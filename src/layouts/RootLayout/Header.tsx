@@ -60,7 +60,7 @@ export default function Header() {
                 </NavLink>
               </li>
             ))}
-            {!user && (
+            {!user?.customer && (
               <div className="px-3 py-2 flex items-center gap-2 bg-slate-300 rounded-lg">
                 <li>
                   <NavLink
@@ -82,7 +82,7 @@ export default function Header() {
               </div>
             )}
           </ul>
-          {user && <AccountDropdown path="/login" />}
+          {user?.customer && <AccountDropdown path="/login" profileLink="customer" />}
           <Link to="/cart" className="relative rounded-xl text-amber-700 hover:text-amber-900">
             <ShoppingCart className="w-8 h-8" />
             <span className="sr-only">Shopping cart</span>
@@ -115,7 +115,7 @@ export default function Header() {
                   </NavLink>
                 </li>
               ))}
-              {!user && (
+              {!user?.customer && (
                 <div className="px-3 py-2 flex items-center gap-2 bg-slate-300 rounded-lg">
                   <li>
                     <NavLink

@@ -14,7 +14,7 @@ import { removeFromLocalStorage } from '@/utils/local-storage';
 import { LogOut } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
-export function AccountDropdown({ path }: { path?: string }) {
+export function AccountDropdown({ path, profileLink }: { path?: string; profileLink?: string }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ export function AccountDropdown({ path }: { path?: string }) {
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link to="/customer/profile">
+        <Link to={`/${profileLink}/profile`}>
           <DropdownMenuItem>Profile</DropdownMenuItem>
         </Link>
         <DropdownMenuItem onClick={handleLogout}>

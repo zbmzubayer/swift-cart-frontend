@@ -1,12 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import envConfig from '@/config';
 import { tokenKey } from '@/constants/storageKeys';
 import { useLoginMutation } from '@/redux/features/auth/authApi';
 import { setLoading, setUser } from '@/redux/features/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { getUserByToken } from '@/services/auth.service';
+import { getUserById, getUserByToken } from '@/services/auth.service';
 import { setToLocalStorage } from '@/utils/local-storage';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Eye, EyeOff } from 'lucide-react';
@@ -45,20 +44,23 @@ export default function LoginForm() {
       const res = await loginUser(values).unwrap();
       const token = res?.data?.accessToken;
       setToLocalStorage(tokenKey, token);
-      toast({
-        title: 'Login Success',
-        description: 'You have logged in successfully',
-        variant: 'success',
-      });
       const userId = getUserByToken()?.id;
-      const res2 = await fetch(`${envConfig.API_BASE_URL}/user/${userId}`, {
-        headers: {
-          Authorization: token!,
-        },
-      });
-      const data = await res2.json();
-      dispatch(setUser(data?.data));
-      dispatch(setLoading(false));
+      const userData = await getUserById(userId!, token);
+      if (userData?.data?.customer) {
+        toast({
+          title: 'Login Success',
+          description: 'You have logged in successfully',
+          variant: 'success',
+        });
+        dispatch(setUser(userData?.data));
+        dispatch(setLoading(false));
+      } else {
+        toast({
+          title: 'Login Failed',
+          description: 'You are not an customer',
+          variant: 'destructive',
+        });
+      }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast({
@@ -71,7 +73,7 @@ export default function LoginForm() {
 
   const { user } = useAppSelector(state => state.auth);
   useEffect(() => {
-    if (user) {
+    if (user && user.customer) {
       navigate(location.state?.path || '/');
     }
   }, [user, location.state, navigate]);
